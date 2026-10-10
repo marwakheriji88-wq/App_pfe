@@ -1,0 +1,13 @@
+
+###> symfony/framework-bundle ###
+/.env.local
+/.env.local.php
+/.env.*.local
+/config/secrets/prod/prod.decrypt.private.php
+/public/bundles/
+/var/
+/vendor/
+###< symfony/framework-bundle ###
+src/Controller/models/chatbot_model/model.safetensors
+src/Controller/chatbot_api.py
+src/Controller/model.safetensors

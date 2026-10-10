@@ -1,0 +1,356 @@
+{#
+{% extends 'base.html.twig' %}
+
+{% block title %}Register{% endblock %}
+
+{% block body %}
+    {% for flash_error in app.flashes('verify_email_error') %}
+        <div class="alert alert-danger" role="alert">{{ flash_error }}</div>
+    {% endfor %}
+
+    <h1>Register</h1>
+
+    {{ form_start(registrationForm) }}
+    {{ form_row(registrationForm.email) }}
+    {{ form_row(registrationForm.plainPassword, {
+        label: 'Password'
+    }) }}
+    {{ form_row(registrationForm.agreeTerms) }}
+
+    <button type="submit" class="btn">Register</button>
+    {{ form_end(registrationForm) }}
+
+    <p>do you already have an email?<a href="{{ path('app_login') }}">click here login</a></p>
+{% endblock %}#}
+{#
+<!DOCTYPE html>
+<html>
+
+<head>
+    <!-- Basic Page Info -->
+    <meta charset="utf-8">
+    <title>DeskApp - Bootstrap Admin Dashboard HTML Template</title>
+
+    <!-- Site favicon -->
+    <link rel="apple-touch-icon" sizes="180x180" href="{{ asset('assets/vendors/images/apple-touch-icon.png')}}">
+    <link rel="icon" type="image/png" sizes="32x32" href="{{ asset('assets/vendors/images/favicon-32x32.png')}}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('assets/vendors/images/favicon-16x16.png')}}">
+
+    <!-- Mobile Specific Metas -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- CSS -->
+    <link rel="stylesheet" type="text/css" href="{{ asset('assets/vendors/styles/core.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('assets/vendors/styles/icon-font.min.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('assets/plugins/jquery-steps/jquery.steps.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('assets/vendors/styles/style.css')}}">
+
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-119386393-1"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'UA-119386393-1');
+    </script>
+</head>
+
+<body class="login-page">
+<div class="login-header box-shadow">
+    <div class="container-fluid d-flex justify-content-between align-items-center">
+        <div class="brand-logo">
+            <a href="{{ asset('assets/login.html')}}">
+                <img src="{{ asset('assets/vendors/images/logo_esb.svg')}}" alt="">
+            </a>
+        </div>
+        <div class="login-menu">
+            <ul>
+                <li><a href="{{ asset('assets/login.html')}}">Login</a></li>
+            </ul>
+        </div>
+    </div>
+</div>
+<div class="register-page-wrap d-flex align-items-center flex-wrap justify-content-center">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-md-6 col-lg-7">
+                <img src="{{ asset('assets/vendors/images/register-page-img.png')}}" alt="">
+            </div>
+            <div class="col-md-6 col-lg-5">
+                <div class="register-box bg-white box-shadow border-radius-10">
+                    <div class="wizard-content">
+                        {% for flash_error in app.flashes('verify_email_error') %}
+                            <div class="alert alert-danger" role="alert">{{ flash_error }}</div>
+                        {% endfor %}
+                        <form class="tab-wizard2 wizard-circle wizard" style="border-color: #C90C0F;">
+                            <h5>Overview Information</h5>
+                            <section>
+                                <div class="form-wrap max-width-600 mx-auto">
+                                    <ul class="register-info">
+                                        <li>
+                                            <div class="row">
+                                                {{ form_start(registrationForm, {'attr': {'method': 'post', 'class': 'custom-form'}}) }}
+                                                <div class="input-group custom">
+                                                    {{ form_widget(registrationForm.email, {
+                                                        'attr': {
+                                                            'class': 'form-control form-control-lg',
+                                                            'placeholder': 'Email',
+                                                            'autocomplete': 'email',
+                                                            'autofocus': true
+                                                        }
+                                                    }) }}
+                                                    <div class="input-group-append custom">
+                                                        <span class="input-group-text"><i class="icon-copy dw dw-user1"></i></span>
+                                                    </div>
+                                                </div>
+
+                                                <div class="input-group custom">
+                                                    {{ form_widget(registrationForm.plainPassword, {
+                                                        'label': false,
+                                                        'attr': {
+                                                            'class': 'form-control form-control-lg',
+                                                            'placeholder': '**********',
+                                                            'type': 'password',
+                                                            'autocomplete': 'current-password'
+                                                        }
+                                                    }) }}
+
+                                                </div>
+
+                                                {{ form_row(registrationForm.agreeTerms) }}
+
+                                                {{ form_end(registrationForm, { 'render_rest': false }) }}
+                                                <div class="input-group mb-0">
+                                                    <button class="btn btn-primary btn-lg btn-block" type="submit">Sign up</button>
+                                                </div>
+
+                                                #}
+{#<div class="input-group mb-0">
+                                                    <button class="btn btn-primary btn-lg btn-block" type="submit">Sign up</button>
+                                                </div>
+#}{#
+
+
+                                                #}
+{#<div class="row">
+                                                    <div class="col-sm-12">
+                                                        <div class="input-group mb-0">
+                                                            <button class="btn btn-primary btn-lg btn-block" type="submit">Sign up</button>
+                                                        </div>
+
+                                                    </div>
+                                                </div>#}{#
+
+
+#}
+{#
+                                                {{ form_start(registrationForm) }}
+                                                {{ form_row(registrationForm.email) }}
+                                                {{ form_row(registrationForm.plainPassword, {
+                                                    label: 'Password'
+                                                }) }}#}{#
+
+                                            </div>
+                                            <br>
+                                            <p>do you already have an email?<a href="{{ path('app_login') }}" style="color: #1b00ff">click here login</a></p>
+
+                                        </li>
+
+
+
+                                    </ul>
+
+                                </div>
+                            </section>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- success Popup html Start -->
+<button type="button" id="success-modal-btn" hidden data-toggle="modal" data-target="#success-modal" data-backdrop="static">Launch modal</button>
+<div class="modal fade" id="success-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered max-width-400" role="document">
+        <div class="modal-content">
+            <div class="modal-body text-center font-18">
+                <h3 class="mb-20">Form Submitted!</h3>
+                <div class="mb-30 text-center"><img src="{{ asset('assets/vendors/images/success.png')}}"></div>
+                Account created !
+            </div>
+            <div class="modal-footer justify-content-center">
+                <a href="{{ 'app_login' }}" class="btn btn-primary">Done</a>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- success Popup html End -->
+<!-- js -->
+<script src="{{ asset('assets/vendors/scripts/core.js')}}"></script>
+<script src="{{ asset('assets/vendors/scripts/script.min.js')}}"></script>
+<script src="{{ asset('assets/vendors/scripts/process.js')}}"></script>
+<script src="{{ asset('assets/vendors/scripts/layout-settings.js')}}"></script>
+<script src="{{ asset('assets/plugins/jquery-steps/jquery.steps.js')}}"></script>
+<script src="{{ asset('assets/vendors/scripts/steps-setting.js')}}"></script>
+</body>
+
+</html>
+#}
+{% extends 'base.html.twig' %}
+
+{% block title %}Register{% endblock %}
+
+{% block body %}
+<!DOCTYPE html>
+<html>
+
+<head>
+    <!-- Basic Page Info -->
+    <meta charset="utf-8">
+    <title>DeskApp - Bootstrap Admin Dashboard HTML Template</title>
+
+    <!-- Site favicon -->
+    <link rel="apple-touch-icon" sizes="180x180" href="{{ asset('assets/vendors/images/apple-touch-icon.png')}}">
+    <link rel="icon" type="image/png" sizes="32x32" href="{{ asset('assets/vendors/images/favicon-32x32.png')}}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('assets/vendors/images/favicon-16x16.png')}}">
+
+    <!-- Mobile Specific Metas -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- CSS -->
+    <link rel="stylesheet" type="text/css" href="{{ asset('assets/vendors/styles/core.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('assets/vendors/styles/icon-font.min.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('assets/plugins/jquery-steps/jquery.steps.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('assets/vendors/styles/style.css')}}">
+
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-119386393-1"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'UA-119386393-1');
+    </script>
+</head>
+
+<div class="login-header box-shadow">
+    <div class="container-fluid d-flex justify-content-between align-items-center">
+        <div class="brand-logo" style="margin-left:150px">
+            <a href="{{ path('app_login') }}">
+                <img src="{{ asset('assets/vendors/images/logo_esb.png')}}" alt="">
+            </a>
+        </div>
+        <div class="{{ asset('assets/login-menu')}}">
+            <ul>
+                <li><a href="{{ path('app_login')}}">Login</a></li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<div class="login-wrap d-flex align-items-center flex-wrap justify-content-center">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-md-10 col-lg-6">
+                <img class="enlarged-image" src="{{ asset('assets/vendors/images/signup_couleurs_esprit.png')}}" alt="">
+            </div>
+            &nbsp;            &nbsp;
+            &nbsp;
+            &nbsp;
+            &nbsp;
+            &nbsp;
+            &nbsp;
+            &nbsp;
+            &nbsp;
+            &nbsp;
+            &nbsp;
+            &nbsp;
+            &nbsp;
+            &nbsp;
+            &nbsp;
+            &nbsp;
+            &nbsp;
+            &nbsp;
+            &nbsp;
+            &nbsp;
+
+            <div class="register-form">
+            {% for flash_error in app.flashes('verify_email_error') %}
+                <div class="alert alert-danger" role="alert">{{ flash_error }}</div>
+            {% endfor %}
+
+            <div class="form-title">
+                <h2 class="text-center text-primary">Register</h2>
+                <p>Overview Information</p>
+            </div>
+
+            {{ form_start(registrationForm) }}
+                <div class="form-group">
+                    {{ form_row(registrationForm.username, { 'attr': {'class': 'form-control', 'placeholder': 'Full Name'}, 'label': false }) }}
+                </div>
+                <div class="form-group">
+                    {{ form_row(registrationForm.phoneNumber, { 'attr': {'class': 'form-control', 'placeholder': 'Phone Number','type' : 'tel','pattern': '[0-9]{2}[0-9]{3}[0-9]{3}','title': 'Phone number format: 12-345-678'
+                    }, 'label': false }) }}
+                </div>
+                <div class="form-group">
+                    {{ form_row(registrationForm.dateOfBirth, { 'attr': {'class': 'form-control', 'placeholder': 'Date of Birth'}, 'label': false }) }}
+                </div>
+
+                <div class="form-group">
+                    <label for="gender" class="form-label" style="color: gray">Gender</label>
+                    <div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" id="gender_male" name="registrationForm[gender]" value="Male" required>
+                        <label class="form-check-label" for="gender_male">Male</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" id="gender_female" name="registrationForm[gender]" value="Female" required>
+                        <label class="form-check-label" for="gender_female">Female</label>
+                    </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="country" class="form-label" style="color: gray">Country</label>
+                    <select id="country" name="registrationForm[country]" class="form-control" required>
+                        <option value="" disabled selected style="color: gray">Not Chosen</option>
+                        {% for country in countries %}
+                            <option value="{{ country }}">{{ country }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+
+
+                <div class="form-group">
+                    <label for="address" class="form-label" style="color: gray" >Address</label>
+                    <textarea class="form-control" id="country" name="registrationForm[address]" class="form-control" required></textarea>
+                </div>
+                <div class="form-group">
+                {{ form_row(registrationForm.email, { 'attr': {'class': 'form-control', 'placeholder': 'Email'}, 'label': false }) }}
+            </div>
+            <div class="form-group">
+                {{ form_row(registrationForm.plainPassword, { 'attr': {'class': 'form-control', 'placeholder': 'Password'}, 'label': false }) }}
+            </div>
+            <div class="form-group terms-group">
+                {{ form_row(registrationForm.agreeTerms, { 'attr': {'class': 'form-check-input'}, 'label': false }) }}
+                <p class="terms-text">I have read and agreed to the <a href="#" style="color:#C90C0F">terms of services</a> and <a href="#" style="color:#C90C0F">privacy policy</a></p>
+            </div>
+
+                <div class="text-center">
+                    <button type="submit" class="btn btn-primary" style="background-color:#C90C0F">Sign up</button>
+                </div>
+            {{ form_end(registrationForm) }}
+
+            <p>do you already have an email? <a href="{{ path('app_login') }}">click here login</a></p>
+        </div>
+    </div>
+    </div>
+</div>
+
+{% endblock %}

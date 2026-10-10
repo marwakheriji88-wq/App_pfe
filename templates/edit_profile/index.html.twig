@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <!-- Basic Page Info -->
+    <meta charset="utf-8">
+    <title>DeskApp - Bootstrap Admin Dashboard HTML Template</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+
+    <!-- Site favicon -->
+    <link rel="apple-touch-icon" sizes="180x180" href="{{ asset('assets/vendors/images/apple-touch-icon.png')}}">
+    <link rel="icon" type="image/png" sizes="32x32" href="{{ asset('assets/vendors/images/favicon-32x32.png') }}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('assets/vendors/images/favicon-16x16.png') }}">
+
+
+    <!-- Mobile Specific Metas -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- CSS -->
+    <link rel="stylesheet" type="text/css" href="{{ asset('assets/vendors/styles/core.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('assets/vendors/styles/icon-font.min.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('assets/vendors/styles/style.css')}}">
+
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-119386393-1"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'UA-119386393-1');
+    </script>
+</head>
+<body>
+<div class="header">
+    <div class="header-left">
+        <div class="menu-icon dw dw-menu"></div>
+        <div class="search-toggle-icon dw dw-search2" data-toggle="header_search"></div>
+        <div class="header-search">
+            <form method="GET" id="searchForm">
+                <div class="form-group mb-0">
+                    <i class="dw dw-search2 search-icon"></i>
+                    <input
+                            type="text"
+                            id="searchInput"
+                            name="query"
+                            class="form-control search-input"
+                            placeholder="Search and Highlight"
+                            autocomplete="off"
+                            oninput="highlightSearch()">
+                </div>
+            </form>
+        </div>
+    </div>
+    <div class="header-right">
+        <div class="dashboard-setting user-notification">
+            <div class="dropdown">
+                <a class="dropdown-toggle no-arrow" href="javascript:;" data-toggle="right-sidebar">
+                    <i class="dw dw-settings2"></i>
+                </a>
+            </div>
+        </div>
+        <div class="user-info-dropdown">
+            <div class="dropdown">
+                <a class="dropdown-toggle" href="#" role="button" data-toggle="dropdown">
+						<span class="user-icon">
+							<img src="{{ asset('assets/vendors/images/photo1.jpg')}}" alt="">
+						</span>
+                    <span class="user-name">{{ user.username }}</span>
+                </a>
+                <div class="dropdown-menu dropdown-menu-right dropdown-menu-icon-list">
+                    <a class="dropdown-item" href="{{ path('edit_profile')}}"><i class="dw dw-user1"></i> Profile</a>
+                    <a class="dropdown-item" href="{{ path('app_logout')}}"><i class="dw dw-logout"></i> Log Out</a>
+                </div>
+            </div>
+        </div>
+        
+    </div>
+</div>
+
+<div class="right-sidebar">
+    <div class="sidebar-title">
+        <h3 class="weight-600 font-16 text-blue">
+            Layout Settings
+            <span class="btn-block font-weight-400 font-12">User Interface Settings</span>
+        </h3>
+        <div class="close-sidebar" data-toggle="right-sidebar-close">
+            <i class="icon-copy ion-close-round"></i>
+        </div>
+    </div>
+    <div class="right-sidebar-body customscroll">
+        <div class="right-sidebar-body-content">
+            <h4 class="weight-600 font-18 pb-10">Header Background</h4>
+            <div class="sidebar-btn-group pb-30 mb-10">
+                <a href="javascript:void(0);" class="btn btn-outline-primary header-white active">White</a>
+                <a href="javascript:void(0);" class="btn btn-outline-primary header-dark">Dark</a>
+            </div>
+
+            <h4 class="weight-600 font-18 pb-10">Sidebar Background</h4>
+            <div class="sidebar-btn-group pb-30 mb-10">
+                <a href="javascript:void(0);" class="btn btn-outline-primary sidebar-light ">White</a>
+                <a href="javascript:void(0);" class="btn btn-outline-primary sidebar-dark active">Dark</a>
+            </div>
+
+            <h4 class="weight-600 font-18 pb-10">Menu Dropdown Icon</h4>
+            <div class="sidebar-radio-group pb-10 mb-10">
+                <div class="custom-control custom-radio custom-control-inline">
+                    <input type="radio" id="sidebaricon-1" name="menu-dropdown-icon" class="custom-control-input" value="icon-style-1" checked="">
+                    <label class="custom-control-label" for="sidebaricon-1"><i class="fa fa-angle-down"></i></label>
+                </div>
+                <div class="custom-control custom-radio custom-control-inline">
+                    <input type="radio" id="sidebaricon-2" name="menu-dropdown-icon" class="custom-control-input" value="icon-style-2">
+                    <label class="custom-control-label" for="sidebaricon-2"><i class="ion-plus-round"></i></label>
+                </div>
+                <div class="custom-control custom-radio custom-control-inline">
+                    <input type="radio" id="sidebaricon-3" name="menu-dropdown-icon" class="custom-control-input" value="icon-style-3">
+                    <label class="custom-control-label" for="sidebaricon-3"><i class="fa fa-angle-double-right"></i></label>
+                </div>
+            </div>
+
+            <h4 class="weight-600 font-18 pb-10">Menu List Icon</h4>
+            <div class="sidebar-radio-group pb-30 mb-10">
+                <div class="custom-control custom-radio custom-control-inline">
+                    <input type="radio" id="sidebariconlist-1" name="menu-list-icon" class="custom-control-input" value="icon-list-style-1" checked="">
+                    <label class="custom-control-label" for="sidebariconlist-1"><i class="ion-minus-round"></i></label>
+                </div>
+                <div class="custom-control custom-radio custom-control-inline">
+                    <input type="radio" id="sidebariconlist-2" name="menu-list-icon" class="custom-control-input" value="icon-list-style-2">
+                    <label class="custom-control-label" for="sidebariconlist-2"><i class="fa fa-circle-o" aria-hidden="true"></i></label>
+                </div>
+                <div class="custom-control custom-radio custom-control-inline">
+                    <input type="radio" id="sidebariconlist-3" name="menu-list-icon" class="custom-control-input" value="icon-list-style-3">
+                    <label class="custom-control-label" for="sidebariconlist-3"><i class="dw dw-check"></i></label>
+                </div>
+                <div class="custom-control custom-radio custom-control-inline">
+                    <input type="radio" id="sidebariconlist-4" name="menu-list-icon" class="custom-control-input" value="icon-list-style-4" checked="">
+                    <label class="custom-control-label" for="sidebariconlist-4"><i class="icon-copy dw dw-next-2"></i></label>
+                </div>
+                <div class="custom-control custom-radio custom-control-inline">
+                    <input type="radio" id="sidebariconlist-5" name="menu-list-icon" class="custom-control-input" value="icon-list-style-5">
+                    <label class="custom-control-label" for="sidebariconlist-5"><i class="dw dw-fast-forward-1"></i></label>
+                </div>
+                <div class="custom-control custom-radio custom-control-inline">
+                    <input type="radio" id="sidebariconlist-6" name="menu-list-icon" class="custom-control-input" value="icon-list-style-6">
+                    <label class="custom-control-label" for="sidebariconlist-6"><i class="dw dw-next"></i></label>
+                </div>
+            </div>
+
+            <div class="reset-options pt-30 text-center">
+                <button class="btn btn-danger" id="reset-settings">Reset Settings</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="left-side-bar">
+    <div class="brand-logo">
+        <a href="{{ asset('assets/index.html')}}">
+            <img src="{{ asset('assets/vendors/images/logo_esb.png')}}" alt="" class="dark-logo">
+            <img src="{{ asset('assets/vendors/images/logo_esb.png')}}" alt="" class="light-logo">
+        </a>
+        <div class="close-sidebar" data-toggle="left-sidebar-close">
+            <i class="ion-close-round"></i>
+        </div>
+    </div>
+    <div class="menu-block customscroll">
+        <div class="sidebar-menu">
+             <ul id="accordion-menu">
+                    <a href="{{ path('app_admin') }}" class="dropdown-toggle no-arrow ">
+                        <span class="micon fas fa-home"></span><span class="mtext">Home</span>
+                    </a>
+                <li>
+                    <a href=" {{ path('app_dashboard') }}" class="dropdown-toggle no-arrow ">
+                        <span class="micon fas fa-chart-line"></span><span class="mtext">Charts</span>
+                    </a>
+                    
+                </li>
+                <li >
+                    <a href="{{ path('predict_university_transition') }}" class="dropdown-toggle no-arrow">
+                        <span class="micon fas fa-chart-bar"></span><span class="mtext">Prediction</span>
+                    </a>
+                    
+                </li>
+                <li>
+                    <a href="{{ path('app_chatbot')}}" class="dropdown-toggle no-arrow">
+                        <span class="micon fas fa-comment-dots"></span><span class="mtext">Chat</span>
+                    </a>
+                </li>
+                <li>
+                    <div class="dropdown-divider"></div>
+                </li>
+                <li>
+                    <a href="{{ path('edit_profile')}}" class="dropdown-toggle no-arrow active" style="background-color: #C90C0F">
+                        <span class="micon fas fa-user-edit"></span><span class="mtext">Edit Profile</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="{{ path('app_logout') }}" target="_blank" class="dropdown-toggle no-arrow">
+                        <span class="micon fas fa-sign-out-alt"></span>
+                        <span class="mtext">Log out <img src="{{ asset('assets/vendors/images/coming-soon.png')}}" alt="" width="25"></span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+<div class="mobile-menu-overlay"></div>
+
+<div class="main-container d-flex flex-column min-vh-100" style="background-color: white;">
+    <div class="flex-grow-1">
+        <div class="min-height-200px">
+            <div class="page-header" style="background-color: #C90C0F">
+                <div class="row">
+                    <div class="col-md-12 col-sm-12">
+                        <div class="title">
+                            <h4 style="color: white">Profile</h4>
+                        </div>
+                        <nav aria-label="breadcrumb" role="navigation">
+                            <ol class="breadcrumb">
+                                <li class="breadcrumb-item"><a href="{{ asset('assets/index.html') }}" style="color: white">Home</a></li>
+                                <li class="breadcrumb-item active" aria-current="page" style="color: white">Profile</li>
+                            </ol>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container" style="background-color: white">
+            <div class="pd-20 card-box mb-30">
+
+                <form method="POST" action="{{ path('edit_profile') }}">
+                    {{ form_start(form) }}
+
+                    <ul class="profile-edit-list row">
+                        <li class="weight-500 col-md-6">
+                            <h5>Edit Profile</h5>
+                            <br>
+                    {{ form_row(form.username) }}
+                    {{ form_row(form.phoneNumber) }}
+                    {{ form_row(form.dateOfBirth) }}
+                            <br>
+                    {{ form_row(form.gender) }}
+                            <br>
+
+                            {{ form_row(form.country) }}
+                    {{ form_row(form.address) }}
+                    <br>
+                    <button type="submit" class="btn btn-danger">Save Changes</button>
+                        </li>
+
+                        {{ form_end(form) }}
+                        <li class="weight-500 col-md-6">
+                            <h5>Change Password</h5>
+                            <br>
+                            {{ form_start(passwordForm) }}
+                            <div>
+                                {{ form_row(passwordForm.oldPassword, {'label': 'Current Password'}) }}
+                                {% for error in passwordForm.oldPassword.vars.errors %}
+                                    <div class="alert alert-danger mt-2 d-flex align-items-center">
+                                        <i class="fas fa-exclamation-triangle me-2"></i>
+                                        <span>{{ error.message }}</span>
+                                    </div>
+                                {% endfor %}
+                            </div>
+
+                            {{ form_row(passwordForm.plainPassword.first, {'label': 'New Password'}) }}
+                            {{ form_row(passwordForm.plainPassword.second, {'label': 'Repeat Password'}) }}
+                            <button type="submit" class="btn btn-danger mt-3">Change Password</button>
+                            {{ form_end(passwordForm) }}
+                            {% for error in passwordForm.vars.errors %}
+                                <div class="alert alert-danger mt-2 d-flex align-items-center">
+                                    <i class="fas fa-exclamation-triangle me-2"></i>
+                                    <span>{{ error.message }}</span>
+                                </div>
+                            {% endfor %}
+
+                        </li>
+                    </ul>
+                </form>
+
+                <!-- SweetAlert2 Notification -->
+                {% for message in app.flashes('profile_success') %}
+                    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+                    <script>
+                        Swal.fire({
+                            icon: 'success',
+                            title: 'Profile Updated',
+                            text: '{{ message }}',
+                            showConfirmButton: false,
+                            timer: 3000
+                        });
+                    </script>
+                {% endfor %}
+                {% for message in app.flashes('password_success') %}
+                    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+                    <script>
+                        Swal.fire({
+                            icon: 'success',
+                            title: 'Password Changed',
+                            text: '{{ message }}',
+                            showConfirmButton: false,
+                            timer: 3000
+                        });
+                    </script>
+                {% endfor %}
+                <br>
+
+            </div>
+
+        </div>
+    </div>
+    <div class="footer-wrap pd-20 mb-20 card-box" style="background-color: #C90C0F;color: white">
+            ESB - Bootstrap 4 Admin Template By <a href="https://github.com/dropways" target="_blank">Marwa Kheriji</a>
+        </div>
+</div>
+
+{#<script>
+    // Attach an event listener to the form
+    document.querySelector('form').addEventListener('submit', function (event) {
+        event.preventDefault(); // Prevent the default form submission
+
+        const form = event.target; // The form being submitted
+        const formData = new FormData(form); // Gather all form data
+
+        // Use Fetch API to send data to the server
+        fetch(form.action, {
+            method: 'POST',
+            body: formData
+        })
+            .then(response => {
+                if (response.ok) {
+                    return response.json(); // Parse JSON response
+                } else {
+                    throw new Error('Failed to update profile');
+                }
+            })
+            .then(data => {
+                // If the update is successful, show success notification
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Profile Updated',
+                    text: 'Your profile has been updated successfully!',
+                    showConfirmButton: false,
+                    timer: 3000
+                }).then(() => {
+                    location.reload(); // Reload the page after the notification
+                });
+            })
+            .catch(error => {
+                // Handle errors (e.g., server issues, validation errors)
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Error',
+                    text: error.message || 'An unexpected error occurred. Please try again.',
+                });
+            });
+    });
+</script>#}
+
+<!-- js -->
+<script src="{{ asset('assets/vendors/scripts/core.js')}}"></script>
+<script src="{{ asset('assets/vendors/scripts/script.min.js')}}"></script>
+<script src="{{ asset('assets/vendors/scripts/process.js')}}"></script>
+<script src="{{ asset('assets/vendors/scripts/layout-settings.js')}}"></script>
+<style>
+    mark {
+        background-color: yellow;
+        font-weight: bold;
+        color: black;
+    }
+</style>
+<script>
+    function highlightSearch() {
+        const keyword = document.getElementById('searchInput').value.trim();
+
+        // Réinitialiser les anciens surlignages
+        const highlights = document.querySelectorAll('span.highlight');
+        highlights.forEach(span => {
+            span.replaceWith(span.textContent); // Remplace le span par son contenu texte
+        });
+
+        if (!keyword) {
+            return; // Ne rien faire si le champ de recherche est vide
+        }
+
+        // Parcourir tous les nœuds de texte visibles
+        const elements = document.querySelectorAll('body *:not(script):not(style):not(textarea):not(input)');
+        elements.forEach(element => {
+            element.childNodes.forEach(node => {
+                if (node.nodeType === 3) { // Vérifier si c'est un nœud de texte
+                    const regex = new RegExp(`(${keyword})`, 'gi');
+                    if (regex.test(node.nodeValue)) {
+                        const span = document.createElement('span');
+                        span.className = 'highlight';
+                        span.innerHTML = node.nodeValue.replace(regex, '<mark>$1</mark>');
+                        node.replaceWith(span);
+                    }
+                }
+            });
+        });
+
+        // Défilement automatique vers le premier résultat trouvé
+        const firstMatch = document.querySelector('mark');
+        if (firstMatch) {
+            firstMatch.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
+    }
+
+</script>
+</body>
+</html>

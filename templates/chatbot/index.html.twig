@@ -1,0 +1,634 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <!-- Basic Page Info -->
+    <meta charset="utf-8">
+    <title>DeskApp - Bootstrap Admin Dashboard HTML Template</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+
+    <!-- Site favicon -->
+    <link rel="apple-touch-icon" sizes="180x180" href="{{ asset('assets/vendors/images/apple-touch-icon.png')}}">
+    <link rel="icon" type="image/png" sizes="32x32" href="{{ asset('assets/vendors/images/favicon-32x32.png') }}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('assets/vendors/images/favicon-16x16.png') }}">
+
+
+    <!-- Mobile Specific Metas -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- CSS -->
+    <link rel="stylesheet" type="text/css" href="{{ asset('assets/vendors/styles/core.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('assets/vendors/styles/icon-font.min.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('assets/vendors/styles/style.css')}}">
+
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-119386393-1"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'UA-119386393-1');
+    </script>
+</head>
+<body>
+<div class="header">
+    <div class="header-left">
+        <div class="menu-icon dw dw-menu"></div>
+        <div class="search-toggle-icon dw dw-search2" data-toggle="header_search"></div>
+        <div class="header-search">
+            <form method="GET" id="searchForm">
+                <div class="form-group mb-0">
+                    <i class="dw dw-search2 search-icon"></i>
+                    <input
+                            type="text"
+                            id="searchInput"
+                            name="query"
+                            class="form-control search-input"
+                            placeholder="Search and Highlight"
+                            autocomplete="off"
+                            oninput="highlightSearch()">
+                </div>
+            </form>
+        </div>
+    </div>
+    <div class="header-right">
+        <div class="dashboard-setting user-notification">
+            <div class="dropdown">
+                <a class="dropdown-toggle no-arrow" href="javascript:;" data-toggle="right-sidebar">
+                    <i class="dw dw-settings2"></i>
+                </a>
+            </div>
+        </div>
+        <div class="user-info-dropdown">
+            <div class="dropdown">
+                <a class="dropdown-toggle" href="#" role="button" data-toggle="dropdown">
+						<span class="user-icon">
+							<img src="{{ asset('assets/vendors/images/photo1.jpg')}}" alt="">
+						</span>
+                    <span class="user-name">{{ username }}</span>
+                </a>
+                <div class="dropdown-menu dropdown-menu-right dropdown-menu-icon-list">
+                    <a class="dropdown-item" href="{{ path('edit_profile')}}"><i class="dw dw-user1"></i> Profile</a>
+                    <a class="dropdown-item"  id="logoutButton" href="{{ path('app_logout') }}"><i class="dw dw-logout"></i> Log Out</a>
+                </div>
+            </div>
+        </div>
+        
+    </div>
+</div>
+
+<div class="right-sidebar">
+    <div class="sidebar-title">
+        <h3 class="weight-600 font-16 text-blue">
+            Layout Settings
+            <span class="btn-block font-weight-400 font-12">User Interface Settings</span>
+        </h3>
+        <div class="close-sidebar" data-toggle="right-sidebar-close">
+            <i class="icon-copy ion-close-round"></i>
+        </div>
+    </div>
+    <div class="right-sidebar-body customscroll">
+        <div class="right-sidebar-body-content">
+            <h4 class="weight-600 font-18 pb-10">Header Background</h4>
+            <div class="sidebar-btn-group pb-30 mb-10">
+                <a href="javascript:void(0);" class="btn btn-outline-primary header-white active">White</a>
+                <a href="javascript:void(0);" class="btn btn-outline-primary header-dark">Dark</a>
+            </div>
+
+            <h4 class="weight-600 font-18 pb-10">Sidebar Background</h4>
+            <div class="sidebar-btn-group pb-30 mb-10">
+                <a href="javascript:void(0);" class="btn btn-outline-primary sidebar-light ">White</a>
+                <a href="javascript:void(0);" class="btn btn-outline-primary sidebar-dark active">Dark</a>
+            </div>
+
+            <h4 class="weight-600 font-18 pb-10">Menu Dropdown Icon</h4>
+            <div class="sidebar-radio-group pb-10 mb-10">
+                <div class="custom-control custom-radio custom-control-inline">
+                    <input type="radio" id="sidebaricon-1" name="menu-dropdown-icon" class="custom-control-input" value="icon-style-1" checked="">
+                    <label class="custom-control-label" for="sidebaricon-1"><i class="fa fa-angle-down"></i></label>
+                </div>
+                <div class="custom-control custom-radio custom-control-inline">
+                    <input type="radio" id="sidebaricon-2" name="menu-dropdown-icon" class="custom-control-input" value="icon-style-2">
+                    <label class="custom-control-label" for="sidebaricon-2"><i class="ion-plus-round"></i></label>
+                </div>
+                <div class="custom-control custom-radio custom-control-inline">
+                    <input type="radio" id="sidebaricon-3" name="menu-dropdown-icon" class="custom-control-input" value="icon-style-3">
+                    <label class="custom-control-label" for="sidebaricon-3"><i class="fa fa-angle-double-right"></i></label>
+                </div>
+            </div>
+
+            <h4 class="weight-600 font-18 pb-10">Menu List Icon</h4>
+            <div class="sidebar-radio-group pb-30 mb-10">
+                <div class="custom-control custom-radio custom-control-inline">
+                    <input type="radio" id="sidebariconlist-1" name="menu-list-icon" class="custom-control-input" value="icon-list-style-1" checked="">
+                    <label class="custom-control-label" for="sidebariconlist-1"><i class="ion-minus-round"></i></label>
+                </div>
+                <div class="custom-control custom-radio custom-control-inline">
+                    <input type="radio" id="sidebariconlist-2" name="menu-list-icon" class="custom-control-input" value="icon-list-style-2">
+                    <label class="custom-control-label" for="sidebariconlist-2"><i class="fa fa-circle-o" aria-hidden="true"></i></label>
+                </div>
+                <div class="custom-control custom-radio custom-control-inline">
+                    <input type="radio" id="sidebariconlist-3" name="menu-list-icon" class="custom-control-input" value="icon-list-style-3">
+                    <label class="custom-control-label" for="sidebariconlist-3"><i class="dw dw-check"></i></label>
+                </div>
+                <div class="custom-control custom-radio custom-control-inline">
+                    <input type="radio" id="sidebariconlist-4" name="menu-list-icon" class="custom-control-input" value="icon-list-style-4" checked="">
+                    <label class="custom-control-label" for="sidebariconlist-4"><i class="icon-copy dw dw-next-2"></i></label>
+                </div>
+                <div class="custom-control custom-radio custom-control-inline">
+                    <input type="radio" id="sidebariconlist-5" name="menu-list-icon" class="custom-control-input" value="icon-list-style-5">
+                    <label class="custom-control-label" for="sidebariconlist-5"><i class="dw dw-fast-forward-1"></i></label>
+                </div>
+                <div class="custom-control custom-radio custom-control-inline">
+                    <input type="radio" id="sidebariconlist-6" name="menu-list-icon" class="custom-control-input" value="icon-list-style-6">
+                    <label class="custom-control-label" for="sidebariconlist-6"><i class="dw dw-next"></i></label>
+                </div>
+            </div>
+
+            <div class="reset-options pt-30 text-center">
+                <button class="btn btn-danger" id="reset-settings">Reset Settings</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="left-side-bar">
+    <div class="brand-logo">
+        <a href="{{ asset('assets/index.html')}}">
+            <img src="{{ asset('assets/vendors/images/logo_esb.png')}}" alt="" class="dark-logo">
+            <img src="{{ asset('assets/vendors/images/logo_esb.png')}}" alt="" class="light-logo">
+        </a>
+        <div class="close-sidebar" data-toggle="left-sidebar-close">
+            <i class="ion-close-round"></i>
+        </div>
+    </div>
+    <div class="menu-block customscroll">
+        <div class="sidebar-menu">
+            <ul id="accordion-menu">
+                    <a href="{{ path('app_admin') }}" class="dropdown-toggle no-arrow ">
+                        <span class="micon fas fa-home"></span><span class="mtext">Home</span>
+                    </a>
+                <li>
+                    <a href=" {{ path('app_dashboard') }}" class="dropdown-toggle no-arrow ">
+                        <span class="micon fas fa-chart-line"></span><span class="mtext">Charts</span>
+                    </a>
+                    
+                </li>
+                <li >
+                    <a href="{{ path('predict_university_transition') }}" class="dropdown-toggle no-arrow">
+                        <span class="micon fas fa-chart-bar"></span><span class="mtext">Prediction</span>
+                    </a>
+                    
+                </li>
+                <li>
+                    <a href="{{ path('app_chatbot')}}" class="dropdown-toggle no-arrow active"  style="background-color: #C90C0F">
+                        <span class="micon fas fa-comment-dots"></span><span class="mtext">Chat</span>
+                    </a>
+                </li>
+                
+            </ul>
+                </li>
+               {# <li>
+                    <a href="{{ asset('assets/chat.html')}}" class="dropdown-toggle no-arrow">
+                        <span class="micon fas fa-comment-dots"></span><span class="mtext">Chat</span>
+                    </a>
+                </li>#}
+
+                <li>
+                    <div class="dropdown-divider"></div>
+                </li>
+                <li>
+                    <a href="{{ path('edit_profile')}}" class="dropdown-toggle no-arrow">
+                        <span class="micon fas fa-user-edit"></span><span class="mtext">Edit Profile</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="{{ path('app_logout') }}" target="_blank" class="dropdown-toggle no-arrow">
+                        <span class="micon fas fa-sign-out-alt"></span>
+                        <span class="mtext">Log out <img src="{{ asset('assets/vendors/images/coming-soon.png')}}" alt="" width="25"></span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+<div class="mobile-menu-overlay"></div>
+
+
+
+
+
+
+<div class="main-container">
+    <div class="pd-ltr-20 xs-pd-20-10">
+        <div class="min-height-200px">
+            <!-- Page Header -->
+            <div class="page-header">
+                <div class="row">
+                    <div class="col-md-6 col-sm-12">
+                        <div class="title">
+                            <h4>Chat</h4>
+                        </div>
+                        <nav aria-label="breadcrumb" role="navigation">
+                            <ol class="breadcrumb">
+                                <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+                                <li class="breadcrumb-item active" aria-current="page" >Chat</li>
+                            </ol>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Chat Section -->
+            <div class="bg-white border-radius-4 box-shadow mb-30">
+                <div class="row no-gutters">
+                    <!-- Chat Sidebar -->
+                    <div class="col-lg-3 col-md-4 col-sm-12">
+                        <div class="chat-list bg-light-gray">
+                            <div class="chat-search">
+                                <span class="ti-search"></span>
+                                <input type="text" placeholder="Search Contact">
+                            </div>
+                            <div class="notification-list chat-notification-list customscroll">
+                                <ul>
+                                    <li class="active">
+                                        <a href="#">
+                                            <img src="{{ asset('assets/vendors/images/chat-bot-icon.webp') }}" alt="Chatbot Icon">
+                                            <h3 class="clearfix">Chatbot</h3>
+                                            <p><i class="fa fa-circle text-light-green"></i> Online</p>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Chat Area -->
+                    <div class="col-lg-9 col-md-8 col-sm-12">
+                        <div class="chat-detail">
+                            <div class="chat-profile-header clearfix">
+                                <div class="left">
+                                    <div class="clearfix">
+                                        <div class="chat-profile-photo">
+                                            <img src="{{ asset('assets/vendors/images/chat-bot-icon.webp') }}" alt="Chatbot Profile">
+                                        </div>
+                                        <div class="chat-profile-name">
+                                            <h3>Chatbot</h3>
+                                            <span>Online</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- Delete Conversation Button -->
+                                <div class="right text-right">
+                                    <div class="chat-actions">
+                                        <button id="delete-conversation" class="btn btn-danger">Delete Conversation</button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="chat-box">
+                                <div class="chat-desc customscroll" id="chat-messages">
+                                    <ul>
+                                        <!-- Chat Messages Will Be Populated Here -->
+                                    </ul>
+                                </div>
+                                <div class="chat-footer">
+                                    <div class="chat_text_area">
+                                        <textarea id="user-input" placeholder="Type your message…"></textarea>
+                                    </div>
+                                    <div class="chat_send">
+                                        <button id="send-message" class="btn btn-link" type="submit">
+                                            <i class="icon-copy ion-paper-airplane"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- Confirm Delete Modal -->
+            <div id="confirmDeleteModal" class="modal fade" tabindex="-1" role="dialog">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title">Confirm Deletion</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <p>Are you sure you want to delete the conversation? This action cannot be undone.</p>
+                        </div>
+                        <div class="modal-footer">
+                            <button id="confirm-delete" type="button" class="btn btn-danger">Delete</button>
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Footer -->
+           <div class="footer-wrap pd-20 mb-20 card-box" style="background-color: #C90C0F;color: white">
+            ESB - Bootstrap 4 Admin Template By <a href="https://github.com/dropways" target="_blank">Marwa Kheriji</a>
+        </div>
+
+            <!-- JavaScript -->
+            <script>
+                // Send Message Function
+                document.getElementById('send-message').addEventListener('click', async function () {
+                    const userInput = document.getElementById('user-input').value.trim();
+                    const chatMessages = document.getElementById('chat-messages');
+
+                    if (!userInput) {
+                        alert('Please type a message.');
+                        return;
+                    }
+
+                    // Append the user's message to the chat
+                    const userMessage = `
+        <li class="clearfix" id="user-message">
+            <span class="chat-img">
+                <img src="vendors/images/chat-img1.jpg" alt="">
+            </span>
+            <div class="chat-body clearfix">
+                <p>${userInput}</p>
+                <div class="chat_time">Now</div>
+            </div>
+        </li>`;
+                    chatMessages.querySelector('ul').innerHTML += userMessage;
+
+                    // Clear the input field
+                    document.getElementById('user-input').value = '';
+
+                    try {
+                        // Send the POST request to the Flask API
+                        const response = await fetch('/chatbot/response', {
+                            method: 'POST',
+                            headers: { 'Content-Type': 'application/json' },
+                            body: JSON.stringify({ question: userInput }),
+                        });
+
+                        const data = await response.json();
+
+                        if (response.ok && data.response) {
+                            // Append the chatbot's response to the chat
+                            const botMessage = `
+                <li class="clearfix admin_chat" id="bot-message">
+                    <span class="chat-img">
+                        <img src="vendors/images/chat-img2.jpg" alt="">
+                    </span>
+                    <div class="chat-body clearfix">
+                        <p>${data.response}</p>
+                        <div class="chat_time">Now</div>
+                    </div>
+                </li>`;
+                            chatMessages.querySelector('ul').innerHTML += botMessage;
+                        } else {
+                            // Handle errors
+                            const errorMessage = `
+                <li class="clearfix admin_chat">
+                    <span class="chat-img">
+                        <img src="vendors/images/chat-img2.jpg" alt="">
+                    </span>
+                    <div class="chat-body clearfix">
+                        <p>Error: ${data.error}</p>
+                        <div class="chat_time">Now</div>
+                    </div>
+                </li>`;
+                            chatMessages.querySelector('ul').innerHTML += errorMessage;
+                        }
+                    } catch (error) {
+                        console.error('Error connecting to chatbot API:', error);
+                        const errorMessage = `
+            <li class="clearfix admin_chat">
+                <span class="chat-img">
+                    <img src="vendors/images/chat-img2.jpg" alt="">
+                </span>
+                <div class="chat-body clearfix">
+                    <p>Error connecting to chatbot. Please try again later.</p>
+                    <div class="chat_time">Now</div>
+                </div>
+            </li>`;
+                        chatMessages.querySelector('ul').innerHTML += errorMessage;
+                    }
+                });
+
+                // Fetch and display chat history when the page loads
+                document.addEventListener('DOMContentLoaded', async function () {
+                    const chatMessages = document.getElementById('chat-messages');
+
+                    try {
+                        const response = await fetch('/chatbot/history', {
+                            method: 'GET',
+                        });
+                        const history = await response.json();
+
+                        // Display each message in the chat
+                        history.forEach(msg => {
+                            const messageHTML = `
+                <li class="clearfix ${msg.sender === 'chatbot' ? 'admin_chat' : ''}" data-message-id="${msg.id}">
+                    <span class="chat-img">
+                        <img src="vendors/images/chat-img${msg.sender === 'chatbot' ? '2' : '1'}.jpg" alt="">
+                    </span>
+                    <div class="chat-body clearfix">
+                        <p>${msg.message}</p>
+                        <div class="chat_time">${msg.created_at}</div>
+<!--                        <button class="delete-message">Delete</button>-->
+                    </div>
+                </li>`;
+                            chatMessages.querySelector('ul').innerHTML += messageHTML;
+                        });
+                    } catch (error) {
+                        console.error('Error fetching chat history:', error);
+                    }
+                });
+
+                // Delete individual message
+                document.addEventListener('click', async function (e) {
+                    if (e.target.classList.contains('delete-message')) {
+                        const messageElement = e.target.closest('li');
+                        const messageId = messageElement.getAttribute('data-message-id');
+
+                        try {
+                            const response = await fetch(`/chatbot/message/delete/${messageId}`, {
+                                method: 'DELETE',
+                            });
+
+                            const data = await response.json();
+
+                            if (response.ok) {
+                                messageElement.remove(); // Remove the message from the DOM
+                                alert('Message deleted successfully');
+                            } else {
+                                alert(`Error deleting message: ${data.error}`);
+                            }
+                        } catch (error) {
+                            console.error('Error deleting message:', error);
+                            alert('Failed to delete the message. Please try again later.');
+                        }
+                    }
+                });
+
+                // Delete entire conversation
+                document.getElementById('delete-conversation').addEventListener('click', async function () {
+                    if (!confirm('Are you sure you want to delete the entire conversation?')) {
+                        return;
+                    }
+
+                    try {
+                        const response = await fetch(`/chatbot/conversation/delete/1`, { // Replace `1` with the dynamic user ID
+                            method: 'DELETE',
+                        });
+
+                        const data = await response.json();
+
+                        if (response.ok) {
+                            // Clear all messages from the chat
+                            document.getElementById('chat-messages').querySelector('ul').innerHTML = '';
+                            alert('Conversation deleted successfully');
+                        } else {
+                            alert(`Error deleting conversation: ${data.error}`);
+                        }
+                    } catch (error) {
+                        console.error('Error deleting conversation:', error);
+                        alert('Failed to delete the conversation. Please try again later.');
+                    }
+                });
+            </script>
+
+            <script src="{{ asset('assets/vendors/scripts/core.js')}}"></script>
+            <script src="{{ asset('assets/vendors/scripts/script.min.js')}}"></script>
+            <script src="{{ asset('assets/vendors/scripts/process.js')}}"></script>
+            <script src="{{ asset('assets/vendors/scripts/layout-settings.js')}}"></script>
+
+
+</body>
+</html>
+
+
+{#{% extends 'base.html.twig' %}
+
+{% block title %}Chatbot{% endblock %}
+
+{% block body %}
+    <div class="container mt-5">
+        <h1>🤖 Chatbot</h1>
+        <div id="chat-box" style="height: 400px; overflow-y: scroll; border: 1px solid #ccc; padding: 10px;">
+            <!-- Messages vont s'afficher ici -->
+        </div>
+        <div class="mt-3">
+            <input type="text" id="user-input" class="form-control" placeholder="Tapez votre message...">
+            <button class="btn btn-primary mt-2" onclick="sendMessage()">Envoyer</button>
+        </div>
+    </div>
+
+    <script>
+        function sendMessage() {
+            let userInput = document.getElementById('user-input').value;
+
+            if (userInput.trim() === '') {
+                return;
+            }
+
+            // Affiche le message de l'utilisateur dans le chat
+            let chatBox = document.getElementById('chat-box');
+            chatBox.innerHTML += `<div><strong>Vous :</strong> ${userInput}</div>`;
+
+            // Envoie la question à l'API Symfony
+            fetch('/chatbot/response', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ question: userInput })
+            })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.response) {
+                        chatBox.innerHTML += `<div><strong>Bot :</strong> ${data.response}</div>`;
+                    } else if (data.error) {
+                        chatBox.innerHTML += `<div><strong>Erreur :</strong> ${data.error}</div>`;
+                    }
+                    chatBox.scrollTop = chatBox.scrollHeight; // Scroll automatique vers le bas
+                })
+                .catch(error => {
+                    chatBox.innerHTML += `<div><strong>Erreur :</strong> ${error}</div>`;
+                    chatBox.scrollTop = chatBox.scrollHeight;
+                });
+
+            // Réinitialise l'input
+            document.getElementById('user-input').value = '';
+        }
+    </script>
+{% endblock %}#}
+{#{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Chatbot</h1>
+
+    <div id="chatbox" style="border:1px solid #ccc; padding:10px; height:300px; overflow-y:scroll;">
+        <!-- Historique ici -->
+    </div>
+
+    <form id="chat-form">
+        <input type="text" id="question" placeholder="Écrivez votre message..." autocomplete="off" />
+        <button type="submit">Envoyer</button>
+    </form>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const chatbox = document.getElementById("chatbox");
+            const form = document.getElementById("chat-form");
+            const input = document.getElementById("question");
+
+            // === Fonction pour afficher un message dans le chatbox ===
+            function addMessage(sender, text, time) {
+                const msgDiv = document.createElement("div");
+                msgDiv.innerHTML = `<strong>${sender}:</strong> ${text} <span style="font-size: 0.8em; color: gray;">[${time}]</span>`;
+                chatbox.appendChild(msgDiv);
+                chatbox.scrollTop = chatbox.scrollHeight;
+            }
+
+            // === Charger l'historique au chargement de la page ===
+            fetch("/chatbot/history")
+                .then(res => res.json())
+                .then(messages => {
+                    messages.forEach(msg => {
+                        addMessage(msg.sender, msg.message, msg.created_at);
+                    });
+                });
+
+            // === Gestion de l'envoi du message ===
+            form.addEventListener("submit", (e) => {
+                e.preventDefault();
+                const question = input.value.trim();
+                if (!question) return;
+
+                addMessage("Vous", question, new Date().toLocaleTimeString());
+                input.value = "";
+
+                fetch("/chatbot/response", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({ question: question })
+                })
+                    .then(res => res.json())
+                    .then(data => {
+                        if (data.response) {
+                            addMessage("🤖", data.response, new Date().toLocaleTimeString());
+                        } else {
+                            addMessage("🤖", "Erreur : réponse introuvable", new Date().toLocaleTimeString());
+                        }
+                    })
+                    .catch(err => {
+                        addMessage("🤖", "Erreur serveur : " + err.message, new Date().toLocaleTimeString());
+                    });
+            });
+        });
+    </script>
+{% endblock %}#}
